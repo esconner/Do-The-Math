@@ -15,11 +15,8 @@ function roundNumber(number, digits) {
 }
 
 function getRoundingSettings() {
-    console.log("FOO2");
     const workspaceRoundingBehavior = nova.workspace.config.get("esconner.DoTheMath.workspaceRoundingBehavior", "enum");
-    console.log("FOO2 " + workspaceRoundingBehavior);
     const globalRoundingBehavior = nova.config.get("esconner.DoTheMath.globalRoundingBehavior", "enum");
-    console.log("FOO2 " + globalRoundingBehavior);
     var behavior = "";
     var roundingDigits = 0;
     switch (workspaceRoundingBehavior) {
