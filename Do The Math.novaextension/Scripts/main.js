@@ -8,6 +8,43 @@ exports.deactivate = function() {
     // Clean up state before the extension is deactivated
 }
 
+function roundNumber(number, digits) {
+    var multiple = Math.pow(10, digits);
+    var rndedNum = Math.round(number * multiple) / multiple;
+    return rndedNum;
+}
+
+function getRoundingSettings() {
+    console.log("FOO2");
+    const workspaceRoundingBehavior = nova.workspace.config.get("esconner.DoTheMath.workspaceRoundingBehavior", "enum");
+    console.log("FOO2 " + workspaceRoundingBehavior);
+    const globalRoundingBehavior = nova.config.get("esconner.DoTheMath.globalRoundingBehavior", "enum");
+    console.log("FOO2 " + globalRoundingBehavior);
+    var behavior = "";
+    var roundingDigits = 0;
+    switch (workspaceRoundingBehavior) {
+        case "Use Global Setting":
+            roundingDigits = nova.config.get("esconner.DoTheMath.globalRoundingDigits", "number");
+            behavior = globalRoundingBehavior;
+            break;
+        default:
+            roundingDigits = nova.workspace.config.get("esconner.DoTheMath.workspaceRoundingDigits", "number");
+            behavior = workspaceRoundingBehavior;
+            break;
+    }
+    return { behavior: behavior, digits: roundingDigits };
+}
+
+function evaluateWithRoundingSettings(expression) {
+    const roundingSettings = getRoundingSettings();
+    switch (roundingSettings.behavior) {
+        case "None":
+            return mexp.eval(expression);    
+        case "Round Half Up":
+            return roundNumber(mexp.eval(expression), roundingSettings.digits);
+    }
+}
+
 nova.commands.register("do-the-math-and-replace.compute", (editor) => {
     // Replaces the selected text with the evaluated string.
     var selectedRanges = editor.selectedRanges.reverse();
@@ -15,7 +52,7 @@ nova.commands.register("do-the-math-and-replace.compute", (editor) => {
         for (var range of selectedRanges) {
             var text = editor.getTextInRange(range);
             try {
-                var newText = "" + mexp.eval(text);
+                var newText = "" + evaluateWithRoundingSettings(text);
                 e.delete(range);
                 e.insert(range.start, newText);
             }
@@ -33,7 +70,7 @@ nova.commands.register("do-the-math.compute", (editor) => {
         for (var range of selectedRanges) {
             var text = editor.getTextInRange(range);
             try {
-                var newText = " = " + mexp.eval(text);
+                var newText = " = " + evaluateWithRoundingSettings(text);
                 e.insert(range.end, newText)
             }
             catch(e) {
