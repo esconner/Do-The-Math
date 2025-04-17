@@ -1,4 +1,4 @@
-var mexp = require('./math-expression-evaluator.min.js');
+const mexp = require('./math-expression-evaluator.min.js');
 
 exports.activate = function() {
     // Do work when the extension is activated
@@ -9,8 +9,8 @@ exports.deactivate = function() {
 }
 
 function roundNumber(number, digits) {
-    var multiple = Math.pow(10, digits);
-    var rndedNum = Math.round(number * multiple) / multiple;
+    const multiple = Math.pow(10, digits);
+    const rndedNum = Math.round(number * multiple) / multiple;
     return rndedNum;
 }
 
@@ -44,7 +44,7 @@ function evaluateWithRoundingSettings(expression) {
 
 nova.commands.register("do-the-math-and-replace.compute", (editor) => {
     // Replaces the selected text with the evaluated string.
-    var selectedRanges = editor.selectedRanges.reverse();
+    const selectedRanges = editor.selectedRanges.reverse();
     editor.edit(function(e) {
         for (var range of selectedRanges) {
             var text = editor.getTextInRange(range);
@@ -62,7 +62,7 @@ nova.commands.register("do-the-math-and-replace.compute", (editor) => {
 
 nova.commands.register("do-the-math.compute", (editor) => {
     // Appends the evaluated string to the expression.
-    var selectedRanges = editor.selectedRanges.reverse();
+    const selectedRanges = editor.selectedRanges.reverse();
     editor.edit(function(e) {
         for (var range of selectedRanges) {
             var text = editor.getTextInRange(range);
