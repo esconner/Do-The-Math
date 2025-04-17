@@ -1,7 +1,7 @@
 {
-    "identifier": "joshgreco.DoTheMath",
+    "identifier": "esconner.DoTheMath",
     "name": "Do The Math",
-    "organization": "Josh Greco",
+    "organization": "Eric Sean Conner",
     "description": "An expression evaluator for Nova.",
     "version": "1.0",
     "categories": ["commands"],
@@ -11,12 +11,17 @@
     "commands": {
         "editor": [
             {
-                "title": "Do the Math",
+                "title": "Evaluate",
                 "command": "do-the-math.compute",
+                "when": "editorHasSelection"
+            },
+            {
+                "title": "Evaluate and Replace",
+                "command": "do-the-math-and-replace.compute",
                 "when": "editorHasSelection"
             }
         ]
     },
-    "bugs": "https://github.com/joshgreco/Do-The-Math/issues",
-    "repository": "https://github.com/joshgreco/Do-The-Math"
+    "bugs": "https://github.com/esconner/Do-The-Math/issues",
+    "repository": "https://github.com/esconner/Do-The-Math"
 }
