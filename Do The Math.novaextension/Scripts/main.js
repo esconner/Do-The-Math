@@ -42,7 +42,7 @@ function evaluateWithRoundingSettings(expression) {
     }
 }
 
-nova.commands.register("do-the-math-and-replace.compute", (editor) => {
+nova.commands.register("do-the-math.compute-and-replace", (editor) => {
     // Replaces the selected text with the evaluated string.
     const selectedRanges = editor.selectedRanges.reverse();
     editor.edit(function(e) {
@@ -60,7 +60,7 @@ nova.commands.register("do-the-math-and-replace.compute", (editor) => {
     });
 });
 
-nova.commands.register("do-the-math.compute", (editor) => {
+nova.commands.register("do-the-math.compute-and-append", (editor) => {
     // Appends the evaluated string to the expression.
     const selectedRanges = editor.selectedRanges.reverse();
     editor.edit(function(e) {

@@ -12,12 +12,12 @@
         "editor": [
             {
                 "title": "Evaluate",
-                "command": "do-the-math.compute",
+                "command": "do-the-math.compute-and-append",
                 "when": "editorHasSelection"
             },
             {
                 "title": "Evaluate and Replace",
-                "command": "do-the-math-and-replace.compute",
+                "command": "do-the-math.compute-and-replace",
                 "when": "editorHasSelection"
             }
         ]
