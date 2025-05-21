@@ -8,17 +8,33 @@ exports.deactivate = function() {
     // Clean up state before the extension is deactivated
 }
 
-
-nova.commands.register("do-the-math.compute", (editor) => {
+nova.commands.register("do-the-math.compute-and-replace", (editor) => {
     // Replaces the selected text with the evaluated string.
-    var selectedRanges = editor.selectedRanges.reverse();
+    const selectedRanges = editor.selectedRanges.reverse();
     editor.edit(function(e) {
         for (var range of selectedRanges) {
-            var text = editor.getTextInRange(range);
+            const text = editor.getTextInRange(range);
             try {
-                var newText = "" + mexp.eval(text);
+                const newText = "" + mexp.eval(text);
                 e.delete(range);
                 e.insert(range.start, newText);
+            }
+            catch(e) {
+                console.error(e.message);
+            }
+        }
+    });
+});
+
+nova.commands.register("do-the-math.compute-and-append", (editor) => {
+    // Appends the evaluated string to the expression.
+    const selectedRanges = editor.selectedRanges.reverse();
+    editor.edit(function(e) {
+        for (var range of selectedRanges) {
+            const text = editor.getTextInRange(range);
+            try {
+                const newText = " = " + mexp.eval(text);
+                e.insert(range.end, newText)
             }
             catch(e) {
                 console.error(e.message);

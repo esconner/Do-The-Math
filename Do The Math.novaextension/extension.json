@@ -9,12 +9,17 @@
     "main": "main.js",
 
     "commands": {
-        "editor": [
-            {
-                "title": "Do the Math",
-                "command": "do-the-math.compute",
-                "when": "editorHasSelection"
-            }
+        "editor" : [
+          {
+            "command" : "do-the-math.compute-and-append",
+            "title" : "Evaluate",
+            "when" : "editorHasSelection"
+          },
+          {
+            "command" : "do-the-math.compute-and-replace",
+            "title" : "Evaluate and Replace",
+            "when" : "editorHasSelection"
+          }
         ]
     },
     "bugs": "https://github.com/joshgreco/Do-The-Math/issues",
