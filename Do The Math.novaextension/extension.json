@@ -13,11 +13,13 @@
             {
                 "title": "Evaluate",
                 "command": "do-the-math.compute-and-append",
+                "shortcut": "ctrl-=",
                 "when": "editorHasSelection"
             },
             {
                 "title": "Evaluate and Replace",
                 "command": "do-the-math.compute-and-replace",
+                "shortcut": "ctrl-+",
                 "when": "editorHasSelection"
             }
         ]
