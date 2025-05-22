@@ -1,7 +1,7 @@
 {
-    "identifier": "joshgreco.DoTheMath",
+    "identifier": "esconner.DoTheMath",
     "name": "Do The Math",
-    "organization": "Josh Greco",
+    "organization": "Eric Sean Conner",
     "description": "An expression evaluator for Nova.",
     "version": "1.0",
     "categories": ["commands"],
@@ -11,12 +11,53 @@
     "commands": {
         "editor": [
             {
-                "title": "Do the Math",
-                "command": "do-the-math.compute",
+                "title": "Evaluate",
+                "command": "do-the-math.compute-and-append",
+                "when": "editorHasSelection"
+            },
+            {
+                "title": "Evaluate and Replace",
+                "command": "do-the-math.compute-and-replace",
                 "when": "editorHasSelection"
             }
         ]
     },
-    "bugs": "https://github.com/joshgreco/Do-The-Math/issues",
-    "repository": "https://github.com/joshgreco/Do-The-Math"
+    
+    "config": [
+        {
+            "title": "Rounding Behavior",
+            "key": "esconner.DoTheMath.globalRoundingBehavior",
+            "type": "enum",
+            "values": ["None", "Round Half Up"],
+            "default": "None"
+        },
+        {
+            "key": "esconner.DoTheMath.globalRoundingDigits",
+            "type": "number",
+            "title": "Rounding Digits",
+            "default": 0,
+            "min": 0
+        }
+    ],
+    
+    "configWorkspace": [
+        {
+            "title": "Rounding Behavior",
+            "key": "esconner.DoTheMath.workspaceRoundingBehavior",
+            "type": "enum",
+            "values": ["Use Global Setting", "None", "Round Half Up"],
+            "default": "Use Global Setting"
+        },
+        {
+            "key": "esconner.DoTheMath.workspaceRoundingDigits",
+            "type": "number",
+            "title": "Rounding Digits",
+            "default": 0,
+            "min": 0
+        }
+    ],
+
+    
+    "bugs": "https://github.com/esconner/Do-The-Math/issues",
+    "repository": "https://github.com/esconner/Do-The-Math"
 }
